@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mall.mapper.MallMapper">
+     <select id="queryshops" resultType="shops">
+       select * from shops
+     </select>
+
+    <select id="queryshopbyid" resultType="shops" parameterType="int">
+        select  * from shops where sid=#{sid}
+    </select>
+
+    <insert id="adduser" parameterType="user">
+        insert into user (uname,uage,password)values (#{uname},#{uage},#{password})
+    </insert>
+
+    <select id="loginuser" parameterType="Map" resultType="user">
+        select * from user where uname=#{uname} and password=#{password}
+    </select>
+
+    <select id="addcard" parameterType="card">
+        insert into card(sid,uid,sname,scount,TotalPrice,simg) values (#{sid},#{uid},#{sname},#{scount},#{totalprice},#{simg})
+    </select>
+
+    <select id="querycardbyid" parameterType="int" resultType="card">
+        select * from card where uid=#{uid}
+    </select>
+
+    <delete id="delcardbyid" parameterType="int">
+        delete  from  card where cid=#{cid}
+    </delete>
+</mapper>
