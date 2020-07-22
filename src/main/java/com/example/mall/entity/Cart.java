@@ -1,6 +1,6 @@
 package com.example.mall.entity;
 
-public class Card {
+public class Cart {
     private int cid;
     private int sid;
     private int uid;

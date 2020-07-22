@@ -1,10 +1,10 @@
 package com.example.mall.controller;
 
 
-import com.example.mall.entity.Card;
-import com.example.mall.entity.Shops;
-import com.example.mall.entity.User;
+import com.example.mall.entity.*;
 import com.example.mall.service.MallService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -32,9 +32,10 @@ public class MallController {
 
     @ResponseBody
     @RequestMapping("queryshops")
-    public List<Shops> queryshops(){
-        List<Shops> queryshops = mallService.queryshops();
-        return queryshops;
+    public PageInfo queryshops(@RequestParam(value = "currentpage",defaultValue = "1") int current){
+        PageHelper.startPage(current,4);
+        PageInfo pageInfo=new PageInfo(mallService.queryshops());
+        return pageInfo;
     }
 
     @ResponseBody
@@ -82,32 +83,32 @@ public class MallController {
     }
 
     @ResponseBody
-    @RequestMapping("card")
+    @RequestMapping("cart")
     public boolean addcard(@RequestParam("sid") int sid,@RequestParam("uid") int uid,
                            @RequestParam("sname")  String  sname ,@RequestParam ("scount") String scount,
                            @RequestParam("totalprice") String totalprice,@RequestParam("simg") String simg){
-        Card card=new Card();
-        card.setSid(sid);
-        card.setUid(uid);
-        card.setSname(sname);
-        card.setScount(scount);
-        card.setTotalprice(Double.valueOf(totalprice));
-        card.setSimg(simg);
-        mallService.addcard(card);
+        Cart cart=new Cart();
+        cart.setSid(sid);
+        cart.setUid(uid);
+        cart.setSname(sname);
+        cart.setScount(scount);
+        cart.setTotalprice(Double.valueOf(totalprice));
+        cart.setSimg(simg);
+        mallService.addcart(cart);
         return true;
     }
 
     @ResponseBody
-    @RequestMapping("querycard")
-    public List<Card> querycardbyid(@RequestParam("uid") int uid){
-        List<Card> querycardbyid = mallService.querycardbyid(uid);
-        return querycardbyid;
+    @RequestMapping("querycart")
+    public List<Cart> querycardbyid(@RequestParam(value = "uid",required = false) int uid){
+        List<Cart> querycartbyid = mallService.querycartbyid(uid);
+        return querycartbyid;
     }
 
     @ResponseBody
-    @RequestMapping("delcardbyid")
+    @RequestMapping("delcartbyid")
     public boolean delcard(@RequestParam("cid") int cid){
-        mallService.delcradbyid(cid);
+        mallService.delcratbyid(cid);
         return true;
     }
 
@@ -151,4 +152,31 @@ public class MallController {
         return os.toByteArray();
     }
 
+    @ResponseBody
+    @RequestMapping("queryclothes")
+    public List<Clothes> query(){
+        List<Clothes> clothes=mallService.queryclothes();
+        return clothes;
+    }
+
+    @ResponseBody
+    @RequestMapping("querypants")
+    public List<Pants> querypants(){
+        List<Pants> querypants = mallService.querypants();
+        return querypants;
+    }
+
+    @ResponseBody
+    @RequestMapping("queryshoe")
+    public List<Shoe> queryshoe(){
+        List<Shoe> queryshoe = mallService.queryshoe();
+        return queryshoe;
+    }
+
+    @ResponseBody
+    @RequestMapping("querylbt")
+    public List<Lbt> querylbt(){
+        List<Lbt> querylbt = mallService.querylbt();
+        return querylbt;
+    }
 }

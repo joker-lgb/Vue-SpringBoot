@@ -17,15 +17,31 @@
         select * from user where uname=#{uname} and password=#{password}
     </select>
 
-    <select id="addcard" parameterType="card">
-        insert into card(sid,uid,sname,scount,TotalPrice,simg) values (#{sid},#{uid},#{sname},#{scount},#{totalprice},#{simg})
+    <select id="addcart" parameterType="cart">
+        insert into cart(sid,uid,sname,scount,TotalPrice,simg) values (#{sid},#{uid},#{sname},#{scount},#{totalprice},#{simg})
     </select>
 
-    <select id="querycardbyid" parameterType="int" resultType="card">
-        select * from card where uid=#{uid}
+    <select id="querycartbyid" parameterType="int" resultType="cart">
+        select * from cart where uid=#{uid}
     </select>
 
-    <delete id="delcardbyid" parameterType="int">
-        delete  from  card where cid=#{cid}
+    <delete id="delcartbyid" parameterType="int">
+        delete  from  cart where cid=#{cid}
     </delete>
+
+    <select id="queryclothes" resultType="clothes">
+       select  * from  clothes
+    </select>
+
+    <select id="querypants" resultType="pants">
+        select * from pants
+    </select>
+
+    <select id="queryshoe" resultType="shoe">
+        select * from shoe
+    </select>
+
+    <select id="querylbt" resultType="lbt">
+          select * from lbt
+    </select>
 </mapper>

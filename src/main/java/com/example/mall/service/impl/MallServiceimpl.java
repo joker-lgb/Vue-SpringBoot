@@ -1,8 +1,6 @@
 package com.example.mall.service.impl;
 
-import com.example.mall.entity.Card;
-import com.example.mall.entity.Shops;
-import com.example.mall.entity.User;
+import com.example.mall.entity.*;
 import com.example.mall.mapper.MallMapper;
 import com.example.mall.service.MallService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,18 +92,39 @@ public class MallServiceimpl implements MallService {
     }
 
     @Override
-    public void delcradbyid(int cid) {
-        mallMapper.delcardbyid(cid);
+    public void delcratbyid(int cid) {
+        mallMapper.delcartbyid(cid);
     }
 
     @Override
-    public void addcard(Card card) {
-        mallMapper.addcard(card);
+    public List<Clothes> queryclothes() {
+        return mallMapper.queryclothes();
     }
 
     @Override
-    public List<Card> querycardbyid(int uid) {
-        return mallMapper.querycardbyid(uid);
+    public List<Pants> querypants() {
+        return mallMapper.querypants();
+    }
+
+    @Override
+    public List<Shoe> queryshoe() {
+        return mallMapper.queryshoe();
+    }
+
+    @Override
+    public List<Lbt> querylbt() {
+        return mallMapper.querylbt();
+    }
+
+
+    @Override
+    public void addcart(Cart cart) {
+        mallMapper.addcart(cart);
+    }
+
+    @Override
+    public List<Cart> querycartbyid(int uid) {
+        return mallMapper.querycartbyid(uid);
     }
 
 
